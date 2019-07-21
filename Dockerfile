@@ -10,7 +10,11 @@ LABEL org.label-schema.schema-version="1.0" \
 CMD ["/bin/bash"]
 
 ADD docker-ce_17.06.1_ce-0_ubuntu_amd64.deb /
-RUN dpkg -i docker-ce_17.06.1_ce-0_ubuntu_amd64.deb
+cd /var/lib/dpkg 
+RUN mv info info.bak 
+RUN mkdir info 
+RUN apt-get upgrade
+RUN udo apt-get install -y docker-ce_17.06.1_ce-0_ubuntu_amd64.deb
 
 RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
