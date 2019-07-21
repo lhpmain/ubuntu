@@ -9,13 +9,6 @@ LABEL org.label-schema.schema-version="1.0" \
 
 CMD ["/bin/bash"]
 
-ADD docker-ce_17.06.1_ce-0_ubuntu_amd64.deb /
-cd /var/lib/dpkg 
-RUN mv info info.bak 
-RUN mkdir info 
-RUN apt-get upgrade
-RUN dpkg -i docker-ce_17.06.1_ce-0_ubuntu_amd64.deb
-
 RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
@@ -25,6 +18,14 @@ RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_confi
 RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
 RUN mkdir /root/.ssh
+
+ADD docker-ce_17.06.1_ce-0_ubuntu_amd64.deb /
+RUN cd /var/lib/dpkg 
+RUN mv info info.bak 
+RUN mkdir info 
+RUN apt-get upgrade
+apt-get install -y iptables libltdl7
+RUN dpkg -i docker-ce_17.06.1_ce-0_ubuntu_amd64.deb
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
