@@ -6,10 +6,10 @@ LABEL org.label-schema.schema-version="1.0" \
     org.label-schema.vendor="UBUNTU" \
     org.label-schema.license="GPLv2" \
     org.label-schema.build-date="20181204"
-
+    
 CMD ["/bin/bash"]
 
-# RUN apt-get install -y openssh-server
+RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 
 RUN echo 'root:123456' |chpasswd
