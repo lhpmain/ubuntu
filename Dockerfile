@@ -24,4 +24,5 @@ RUN apt-get clean && \
 
 EXPOSE 22
 
-CMD  ["/usr/sbin/sshd", "-D"]
+# CMD  ["/usr/sbin/sshd", "-D"]
+CMD  ["/opt/ibm/wlp/bin/server", "run", "defaultServer"]
