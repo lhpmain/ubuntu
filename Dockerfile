@@ -9,7 +9,8 @@ LABEL org.label-schema.schema-version="1.0" \
     
 CMD ["/bin/bash"]
 
-RUN apt-get install -y openssh-server
+# RUN apt-get install -y openssh-server
+RUN apt-get install -y openssh-server python-rhsm-certificates
 RUN mkdir /var/run/sshd
 
 RUN echo 'root:123456' |chpasswd
